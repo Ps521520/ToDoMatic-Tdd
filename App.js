@@ -31,83 +31,75 @@ function App() {
           <button className="btn btn-primary btn-sm" onClick={() => { setFunc('onShowCompletedTask'); }}> Show Completed Tasks</button>
         </div>
 
-        <table class="table">
-          <thead>
-            <tr>
-              <td>Task Name</td>
-              <td>Is Task Completed?</td>
-              <td>Delete Task</td>
-            </tr>
-          </thead>
+        <div className="to-do-section">
           {
-            func === 'onShowAllTask' ?
-
-              itemsarr.map((element) => {
-                return <tbody key={element.id}>
-                  <tr className="table-active">
-                    <td>{element.workname}</td>
-                    <td><input type="checkbox" onChange={(event) => {
+            func === 'onShowAllTask' ? <div className="Tasks">
+              {
+                itemsarr.map((element) => {
+                  return <div className="Task" key={element.id}>
+                    <h1>{element.workname}</h1>
+                    <label>Is Work Complited : </label>
+                    <input type="checkbox" onChange={(event) => {
                       element.isComplited = event.target.checked;
                       let arr = itemsarr.filter((item) => item.id !== 0);
                       setitemsarr(arr);
-                    }} checked={element.isComplited} /></td>
-                    <td>< button onClick={() => {
+                    }} checked={element.isComplited} />
+                    < button onClick={() => {
                       let arr = itemsarr.filter((item) => item.id !== element.id);
                       setitemsarr(arr);
-                    }}>Delete Task </button></td>
-                  </tr>
-                </tbody>
-              })
-
-              : func === 'onShowActiveTask' ?
-
+                    }}>Delete Task </button>
+                  </div>
+                })
+              }
+            </div> : func === 'onShowActiveTask' ? <div className="Tasks">
+              {
                 itemsarr.map((element) => {
                   if (element.isComplited === false) {
-                    return <tbody key={element.id}>
-                      <tr className="table-active">
-                        <td>{element.workname}</td>
-                        <td><input type="checkbox" onChange={(event) => {
+                    return <div className="Task" key={element.id}>
+                      <h1>{element.workname}</h1>
+                      <label>Is Work Complited : </label>
+                      <input type="checkbox" onChange={(event) => {
+                        element.isComplited = event.target.checked;
+                        let arr = itemsarr.filter((item) => item.id !== 0);
+                        setitemsarr(arr);
+                      }} checked={element.isComplited} />
+
+                      <button onClick={() => {
+                        let arr = itemsarr.filter((item) => item.id !== element.id);
+                        setitemsarr(arr);
+                      }}>Delete Task </button>
+                    </div>
+                  }
+                })
+              }
+            </div>
+              : <div className="Tasks">
+                {
+                  itemsarr.map((element) => {
+                    if (element.isComplited === true) {
+                      return <div className="Task" key={element.id}>
+                        <h1>{element.workname}</h1>
+                        <label>Is Work Complited : </label>
+                        <input type="checkbox" onChange={(event) => {
                           element.isComplited = event.target.checked;
                           let arr = itemsarr.filter((item) => item.id !== 0);
                           setitemsarr(arr);
-                        }} checked={element.isComplited} /></td>
-                        <td>< button onClick={() => {
+                        }} checked={element.isComplited} />
+
+                        <button onClick={() => {
                           let arr = itemsarr.filter((item) => item.id !== element.id);
                           setitemsarr(arr);
-                        }}>Delete Task </button></td>
-                      </tr>
-                    </tbody>
-                  }
-                })
-
-
-                :
-
-                itemsarr.map((element) => {
-                  if (element.isComplited === true) {
-                    return <tbody key={element.id}>
-                      <tr className="table-active">
-                        <td>{element.workname}</td>
-                        <td><input type="checkbox" onChange={(event) => {
-                          element.isComplited = event.target.checked;
-                          let arr = itemsarr.filter((item) => item.id !== 0);
-                          setitemsarr(arr);
-                        }} checked={element.isComplited} /></td>
-                        <td>< button onClick={() => {
-                          let arr = itemsarr.filter((item) => item.id !== element.id);
-                          setitemsarr(arr);
-                        }}>Delete Task </button></td>
-                      </tr>
-                    </tbody>
-                  }
-                })
-
-
+                        }}>Delete Task </button>
+                      </div>
+                    }
+                  })
+                }
+              </div>
           }
-        </table>
+        </div>
 
       </div>
-    </div >
+    </div>
   );
 }
 
